@@ -1,58 +1,83 @@
 # Research Agent
 
-`research-agent` is a starter repository for building an AI-powered research workflow.
+This repository collects reusable research-assistant skills for two focused workflows:
 
-At the moment the repository is intentionally minimal and serves as a clean base for future development. This README provides a basic structure so the project can be extended without reworking the documentation from scratch.
+- `paper/`: academic writing and paper-polishing skills
+- `teaser/`: academic teaser figure and method-diagram prompting skills
 
-## Goals
+Each skill package includes:
 
-- Collect and organize research inputs
-- Run repeatable analysis workflows
-- Generate summaries, notes, or structured outputs
-- Provide a foundation for agent-based experimentation
+- `SKILL.md`: the skill definition and operating workflow
+- `agents/openai.yaml`: agent configuration
+- `references/`: reusable prompt templates or prompt references
 
-## Current Status
-
-This repository is currently in the bootstrap stage.
-
-- The remote repository has been initialized
-- Documentation scaffolding is in place
-- Base repository directories have been created
-- Application code has not been added yet
-
-## Suggested Structure
-
-As the project grows, you can organize it with a layout like this:
+## Repository Layout
 
 ```text
 .
 ├── README.md
-├── data/
-│   └── .gitkeep
-├── docs/
-│   └── .gitkeep
-├── scripts/
-│   └── .gitkeep
-├── src/
-│   └── .gitkeep
-└── tests/
-    └── .gitkeep
+├── paper/
+│   ├── polish-paper/
+│   └── polish-paper-bilingual/
+└── teaser/
+    ├── gpt-image-teaser/
+    └── paperbanana-teaser/
 ```
 
-## Getting Started
+## Paper Skills
 
-1. Clone the repository.
-2. Add the initial project files under `src/`.
-3. Document setup steps once dependencies and runtime are defined.
-4. Add tests and examples as the first executable components land.
+### `paper/polish-paper`
 
-## Roadmap
+Use this skill for English academic writing improvement without changing the science.
 
-- Define the first research workflow
-- Add implementation code
-- Add reproducible configuration and dependency management
-- Add tests and usage examples
+Best for:
 
-## License
+- polishing abstracts, introductions, methods, experiments, and conclusions
+- rewriting rebuttals in a clearer and more conference-ready style
+- tightening wording, structure, and logical flow while preserving technical claims
 
-Add a license file if and when you decide how this project should be distributed.
+### `paper/polish-paper-bilingual`
+
+Use this skill for Chinese-first academic writing and bilingual academic rewriting.
+
+Best for:
+
+- polishing Chinese research drafts
+- translating Chinese drafts into natural paper-style English
+- translating English academic text into precise Chinese
+- preparing aligned bilingual revisions or rebuttals
+
+## Teaser Skills
+
+### `teaser/gpt-image-teaser`
+
+Use this skill when the goal is a concise GPT Image-oriented workflow for academic figures.
+
+Best for:
+
+- turning a paper summary into a GPT Image prompt
+- drafting method-overview or teaser prompts quickly
+- issuing targeted follow-up prompts to repair clutter, labels, or layout
+
+### `teaser/paperbanana-teaser`
+
+Use this skill when the user wants a more structured multi-stage academic figure prompting workflow.
+
+Best for:
+
+- planner-stylist-visualizer-critic pipelines
+- conference-style teaser figures and system diagrams
+- critique-and-revise loops for generated academic visuals
+
+## How To Use
+
+1. Pick the skill that matches the task.
+2. Read the corresponding `SKILL.md`.
+3. Reuse the prompts in `references/` when you need a paste-ready template.
+4. Use `agents/openai.yaml` when the skill is being wired into an agent workflow.
+
+## Notes
+
+- `paper/` focuses on writing quality, bilingual rewriting, and rebuttal polishing.
+- `teaser/` focuses on prompt workflows for academic figures rather than direct design-tool implementation.
+- The repository is organized as a skill library, not as an executable application.

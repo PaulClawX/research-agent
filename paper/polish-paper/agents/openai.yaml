@@ -1,0 +1,4 @@
+interface:
+  display_name: "Polish Paper"
+  short_description: "Polish academic writing without changing the science"
+  default_prompt: "Use $polish-paper to revise my paper draft for clarity, concision, structure, and conference-style academic writing while preserving the original technical claims."
