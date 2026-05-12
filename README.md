@@ -17,6 +17,7 @@ This repository is currently in the bootstrap stage.
 
 - The remote repository has been initialized
 - Documentation scaffolding is in place
+- Base repository directories have been created
 - Application code has not been added yet
 
 ## Suggested Structure
@@ -26,11 +27,16 @@ As the project grows, you can organize it with a layout like this:
 ```text
 .
 ├── README.md
-├── src/
-├── scripts/
 ├── data/
+│   └── .gitkeep
 ├── docs/
+│   └── .gitkeep
+├── scripts/
+│   └── .gitkeep
+├── src/
+│   └── .gitkeep
 └── tests/
+    └── .gitkeep
 ```
 
 ## Getting Started
