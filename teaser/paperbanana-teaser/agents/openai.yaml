@@ -1,0 +1,4 @@
+interface:
+  display_name: "PaperBanana Teaser"
+  short_description: "Plan and iterate research teaser prompts"
+  default_prompt: "Use $paperbanana-teaser to turn my paper method into a planner/stylist/visualizer/critic teaser workflow."

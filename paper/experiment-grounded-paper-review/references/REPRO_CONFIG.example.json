@@ -1,0 +1,23 @@
+{
+  "experiments": [
+    {
+      "experiment_id": "E-001",
+      "repo_name": "example-paper-repo",
+      "repo_url": "https://github.com/example/example-paper-repo.git",
+      "checkout": "main",
+      "setup_commands": [
+        "python -m venv .venv",
+        ". .venv/bin/activate && pip install -r requirements.txt"
+      ],
+      "command": ". .venv/bin/activate && python eval.py --split subset-500 --model ours",
+      "dataset": "GUIBench-v2 subset-500",
+      "split": "subset-500",
+      "metric": "task_success_rate",
+      "result_value": 43.2,
+      "baseline_value": 39.7,
+      "status_on_success": "verified_subset_result",
+      "supports": ["C-001"],
+      "notes": "Subset-level evidence only."
+    }
+  ]
+}

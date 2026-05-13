@@ -1,64 +1,73 @@
-# Research Agent
+# research-agent
 
-This repository is a curated library of reusable research-assistant skills.
+This repository is a curated library of reusable research-assistant skills for paper writing, bilingual rewriting, teaser-figure prompting, and experiment-grounded paper verification.
 
-It is organized around two core workflows:
-
-- paper writing and academic rewriting
-- teaser figure and method-diagram prompting
-
-The goal is to keep the repository easy to scan at the top level while allowing each skill to remain self-contained.
+The goal is to keep the top level easy to scan while letting each skill remain self-contained.
 
 ## Repository Structure
 
 ```text
 .
 ├── README.md
-└── skills/
-    ├── README.md
-    ├── paper-writing/
-    │   ├── README.md
-    │   └── polish-paper/
-    └── teaser-figures/
-        ├── README.md
-        ├── gpt-image-teaser/
-        └── paperbanana-teaser/
+├── paper/
+│   ├── polish-paper/
+│   ├── polish-paper-bilingual/
+│   └── experiment-grounded-paper-review/
+└── teaser/
+    ├── gpt-image-teaser/
+    └── paperbanana-teaser/
+```
+
+## Paper Review + Polish: One-Line Use
+
+### For Agent
+
+```text
+Use $polish-paper on <paper-path-or-text> in review-and-polish mode: run the review gate first, then the SciWrite clarity pass, then return safe revised text and the remaining issues.
+```
+
+### For Human
+
+```bash
+codex "Use \$polish-paper on <paper-path-or-text> in review-and-polish mode; target venue: <venue>; output language: en or zh."
 ```
 
 ## What Lives In A Skill
 
-Each skill package follows the same internal pattern:
+Each skill package follows the same pattern:
 
 - `SKILL.md`: purpose, workflow, inputs, output modes, and usage rules
 - `agents/openai.yaml`: agent-facing metadata and starter prompt
-- `references/`: reusable prompt templates or prompt reference material
+- `references/`: reusable prompt templates, rubrics, or reference material
+- `scripts/`: deterministic helper tools when the workflow benefits from execution
 
-## Skill Groups
+## Skill Index
 
-### `skills/paper-writing/`
+### Paper Skills
 
-This group is for improving academic text.
+| Skill | Path | Purpose |
+|---|---|---|
+| `polish-paper` | `paper/polish-paper` | English-first academic paper polishing plus optional review gate and SciWrite-style clarity audit |
+| `polish-paper-bilingual` | `paper/polish-paper-bilingual` | Chinese-first and bilingual academic rewriting for paper sections and rebuttals |
+| `experiment-grounded-paper-review` | `paper/experiment-grounded-paper-review` | Verify paper claims against code, experiments, tables, logs, and reproducible probes; force the manuscript to obey the evidence |
 
-- `polish-paper`: English academic editing and rebuttal polishing
+### Teaser Skills
 
-### `skills/teaser-figures/`
+| Skill | Path | Purpose |
+|---|---|---|
+| `gpt-image-teaser` | `teaser/gpt-image-teaser` | Lightweight GPT Image prompt and revision workflow for academic teaser figures |
+| `paperbanana-teaser` | `teaser/paperbanana-teaser` | Multi-stage planner/stylist/visualizer/critic workflow for academic teaser figures |
 
-This group is for academic figure prompting workflows.
+## Navigation
 
-- `gpt-image-teaser`: lightweight GPT Image prompt and revision workflow
-- `paperbanana-teaser`: multi-stage planner/stylist/visualizer/critic workflow
+1. Pick the workflow family that matches the task: `paper/` or `teaser/`.
+2. Open the target skill's `SKILL.md` for the exact operating instructions.
+3. Reuse prompt text from that skill's `references/` directory when needed.
+4. Use scripts from that skill's `scripts/` directory when the workflow includes deterministic execution.
 
-## How To Navigate
+## Suggested Usage
 
-1. Start in [skills/README.md](/Users/posit/workspace/paper/research-agent/skills/README.md).
-2. Pick the workflow family that matches the task.
-3. Open the group README for a quick comparison.
-4. Open the target skill's `SKILL.md` for the exact operating instructions.
-5. Reuse prompt text from that skill's `references/` directory when needed.
-
-## Design Principles
-
-- Keep the repository top level clean.
-- Group skills by workflow, not by file type.
-- Keep each skill self-contained so it can be copied or reused independently.
-- Use README files as navigation layers instead of forcing users to infer structure from directory names alone.
+- Use `polish-paper` when the draft is already in English and mainly needs academic rewriting.
+- Use `polish-paper-bilingual` when the draft is Chinese, mixed-language, or needs aligned Chinese and English outputs.
+- Use `experiment-grounded-paper-review` when the goal is not just writing quality, but paper-code-experiment consistency and reproducible evidence.
+- Use `gpt-image-teaser` or `paperbanana-teaser` when the output is an academic figure prompt rather than final publication prose.

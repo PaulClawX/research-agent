@@ -1,0 +1,4 @@
+interface:
+  display_name: "Experiment-Grounded Paper Review"
+  short_description: "Force paper claims to obey code and experiments"
+  default_prompt: "Use $experiment-grounded-paper-review to verify my TeX or PDF paper against code, experiments, tables, and logs, then rewrite unsupported claims so the manuscript does not exceed the evidence."
