@@ -17,7 +17,6 @@ Use `paper-writing` when the main artifact is text:
 - experiments
 - conclusions
 - rebuttals
-- bilingual paper drafts
 
 Use `teaser-figures` when the main artifact is a figure prompt or revision workflow:
 

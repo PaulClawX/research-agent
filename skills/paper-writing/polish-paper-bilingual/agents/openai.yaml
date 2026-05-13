@@ -1,4 +1,0 @@
-interface:
-  display_name: "Polish Paper Bilingual"
-  short_description: "Chinese-first and bilingual academic paper rewriting"
-  default_prompt: "Use $polish-paper-bilingual to polish my Chinese paper draft or rewrite it into fluent conference-style English while preserving the original technical claims."

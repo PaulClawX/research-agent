@@ -15,17 +15,6 @@ Best for:
 - rebuttal cleanup
 - issue-first review plus rewrite
 
-### `polish-paper-bilingual`
-
-Use this when the draft is Chinese, mixed-language, or needs bilingual output.
-
-Best for:
-
-- Chinese academic polishing
-- Chinese-to-English paper rewriting
-- English-to-Chinese academic rewriting
-- side-by-side bilingual output
-
 ## Directory Map
 
 ```text
@@ -35,8 +24,4 @@ paper-writing/
 │   ├── SKILL.md
 │   ├── agents/openai.yaml
 │   └── references/
-└── polish-paper-bilingual/
-    ├── SKILL.md
-    ├── agents/openai.yaml
-    └── references/
 ```

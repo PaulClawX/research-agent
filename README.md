@@ -18,8 +18,7 @@ The goal is to keep the repository easy to scan at the top level while allowing 
     ├── README.md
     ├── paper-writing/
     │   ├── README.md
-    │   ├── polish-paper/
-    │   └── polish-paper-bilingual/
+    │   └── polish-paper/
     └── teaser-figures/
         ├── README.md
         ├── gpt-image-teaser/
@@ -41,7 +40,6 @@ Each skill package follows the same internal pattern:
 This group is for improving academic text.
 
 - `polish-paper`: English academic editing and rebuttal polishing
-- `polish-paper-bilingual`: Chinese-first and bilingual academic rewriting
 
 ### `skills/teaser-figures/`
 
