@@ -188,11 +188,36 @@ def main() -> None:
         ],
     )
 
+    evidence_json = out_dir / "NUMERIC_EVIDENCE.json"
+    evidence_md = out_dir / "NUMERIC_EVIDENCE.md"
+    run_python(
+        "extract_numeric_evidence.py",
+        [str(experiments_json), "--json-out", str(evidence_json), "--md-out", str(evidence_md)],
+    )
+
+    enriched_claims_json = out_dir / "CLAIMS_ENRICHED.json"
+    enriched_claims_md = out_dir / "CLAIM_LEDGER_ENRICHED.md"
+    enriched_experiments_json = out_dir / "EXPERIMENTS_ENRICHED.json"
+    run_python(
+        "backfill_claim_evidence.py",
+        [
+            str(claims_json),
+            str(evidence_json),
+            str(experiments_json),
+            "--claims-json-out",
+            str(enriched_claims_json),
+            "--claims-md-out",
+            str(enriched_claims_md),
+            "--experiments-json-out",
+            str(enriched_experiments_json),
+        ],
+    )
+
     inconsistency_json = out_dir / "INCONSISTENCY_REPORT.json"
     inconsistency_md = out_dir / "INCONSISTENCY_REPORT.md"
     run_python(
         "check_claim_result_alignment.py",
-        [str(claims_json), str(experiments_json), "--json-out", str(inconsistency_json), "--md-out", str(inconsistency_md)],
+        [str(enriched_claims_json), str(enriched_experiments_json), "--json-out", str(inconsistency_json), "--md-out", str(inconsistency_md)],
     )
 
 

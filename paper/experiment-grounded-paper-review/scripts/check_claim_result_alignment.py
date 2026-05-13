@@ -26,14 +26,22 @@ def index_support(experiments: list[dict]) -> dict[str, list[dict]]:
 
 
 def evaluate_claim(claim: dict, support_map: dict[str, list[dict]]) -> dict:
+    claim_supports = claim.get("supports", [])
     experiments = support_map.get(claim["claim_id"], [])
+    if not experiments and claim_supports:
+        experiments = [exp for exp in support_map.get("__all__", []) if exp["experiment_id"] in claim_supports]
     status = "unsupported"
     reasons = []
     if experiments:
         if any(exp.get("status") in {"verified_main_table", "verified_multi_seed"} for exp in experiments):
             status = "supported"
+        elif any(exp.get("status") in {"verified_subset_result", "ran_subset", "smoke_test_only", "manual_entry"} for exp in experiments):
+            status = "partially_supported"
         else:
             status = "partially_supported"
+    elif claim.get("current_evidence"):
+        status = "partially_supported"
+        reasons.append("Matched README or log evidence, but no verified experiment support is linked yet.")
     else:
         reasons.append("No supporting experiment was linked.")
 
@@ -80,6 +88,7 @@ def main() -> None:
     claims = json.loads(Path(args.claims_json).read_text(encoding="utf-8"))
     experiments = json.loads(Path(args.experiments_json).read_text(encoding="utf-8"))
     support_map = index_support(experiments)
+    support_map["__all__"] = experiments
     report = [evaluate_claim(claim, support_map) for claim in claims]
 
     Path(args.json_out).write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
