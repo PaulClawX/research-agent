@@ -1,4 +1,10 @@
-__pycache__/
-*.py[cod]
 .DS_Store
+__pycache__/
+*.pyc
+.venv/
+audit-output/
+audit-output-*/
+audit-output*/
+repos/
+logs/
 example/
