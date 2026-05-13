@@ -23,23 +23,25 @@ It is organized around two core workflows:
 - paper writing and academic rewriting
 - teaser figure and method-diagram prompting
 
-The goal is to keep the repository easy to scan at the top level while allowing each skill to remain self-contained.
+The goal is to keep the repository easy to scan while allowing each skill to remain self-contained. The canonical layout is `skills/`; the top-level `paper/` and `teaser/` folders are kept as compatibility mirrors for agents or scripts that still reference the older paths.
 
 ## Repository Structure
 
 ```text
 .
 ├── README.md
-└── skills/
-    ├── README.md
-    ├── paper-writing/
-    │   ├── README.md
-    │   ├── polish-paper/
-    │   └── polish-paper-bilingual/
-    └── teaser-figures/
-        ├── README.md
-        ├── gpt-image-teaser/
-        └── paperbanana-teaser/
+├── skills/
+│   ├── README.md
+│   ├── paper-writing/
+│   │   ├── README.md
+│   │   ├── polish-paper/
+│   │   └── polish-paper-bilingual/
+│   └── teaser-figures/
+│       ├── README.md
+│       ├── gpt-image-teaser/
+│       └── paperbanana-teaser/
+├── paper/   # compatibility mirror, including paper/polish-paper
+└── teaser/  # compatibility mirror
 ```
 
 ## What Lives In A Skill
@@ -76,7 +78,7 @@ This group is for academic figure prompting workflows.
 
 ## Design Principles
 
-- Keep the repository top level clean.
 - Group skills by workflow, not by file type.
 - Keep each skill self-contained so it can be copied or reused independently.
 - Use README files as navigation layers instead of forcing users to infer structure from directory names alone.
+- Keep compatibility mirrors synchronized when changing a mirrored skill.
