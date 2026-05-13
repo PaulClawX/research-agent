@@ -1,26 +1,10 @@
-# research-agent
+# Research Agent
 
-This repository is a curated library of reusable research-assistant skills for paper writing, bilingual rewriting, teaser-figure prompting, and experiment-grounded paper verification.
-
-The goal is to keep the top level easy to scan while letting each skill remain self-contained.
-
-## Repository Structure
-
-```text
-.
-├── README.md
-├── paper/
-│   ├── polish-paper/
-│   ├── polish-paper-bilingual/
-│   └── experiment-grounded-paper-review/
-└── teaser/
-    ├── gpt-image-teaser/
-    └── paperbanana-teaser/
-```
+This repository is a curated library of reusable research-assistant skills.
 
 ## Paper Review + Polish: One-Line Use
 
-### For Agent
+### For Agent (Recommended)
 
 ```text
 Use $polish-paper on <paper-path-or-text> in review-and-polish mode: run the review gate first, then the SciWrite clarity pass, then return safe revised text and the remaining issues.
@@ -32,42 +16,67 @@ Use $polish-paper on <paper-path-or-text> in review-and-polish mode: run the rev
 codex "Use \$polish-paper on <paper-path-or-text> in review-and-polish mode; target venue: <venue>; output language: en or zh."
 ```
 
+This is the simplest path for paper cleanup: one request asks the agent to check correctness risk, reviewer-facing quality, references when available, and writing clarity before polishing.
+
+It is organized around two core workflows:
+
+- paper writing and academic rewriting
+- teaser figure and method-diagram prompting
+
+The goal is to keep the repository easy to scan at the top level while allowing each skill to remain self-contained.
+
+## Repository Structure
+
+```text
+.
+├── README.md
+└── skills/
+    ├── README.md
+    ├── paper-writing/
+    │   ├── README.md
+    │   ├── polish-paper/
+    │   └── polish-paper-bilingual/
+    └── teaser-figures/
+        ├── README.md
+        ├── gpt-image-teaser/
+        └── paperbanana-teaser/
+```
+
 ## What Lives In A Skill
 
-Each skill package follows the same pattern:
+Each skill package follows the same internal pattern:
 
 - `SKILL.md`: purpose, workflow, inputs, output modes, and usage rules
 - `agents/openai.yaml`: agent-facing metadata and starter prompt
-- `references/`: reusable prompt templates, rubrics, or reference material
-- `scripts/`: deterministic helper tools when the workflow benefits from execution
+- `references/`: reusable prompt templates or prompt reference material
 
-## Skill Index
+## Skill Groups
 
-### Paper Skills
+### `skills/paper-writing/`
 
-| Skill | Path | Purpose |
-|---|---|---|
-| `polish-paper` | `paper/polish-paper` | English-first academic paper polishing plus optional review gate and SciWrite-style clarity audit |
-| `polish-paper-bilingual` | `paper/polish-paper-bilingual` | Chinese-first and bilingual academic rewriting for paper sections and rebuttals |
-| `experiment-grounded-paper-review` | `paper/experiment-grounded-paper-review` | Verify paper claims against code, experiments, tables, logs, and reproducible probes; force the manuscript to obey the evidence |
+This group is for improving academic text.
 
-### Teaser Skills
+- `polish-paper`: English academic editing, author-side review gate, SciWrite clarity audit, and rebuttal polishing
+- `polish-paper-bilingual`: Chinese-first and bilingual academic rewriting
 
-| Skill | Path | Purpose |
-|---|---|---|
-| `gpt-image-teaser` | `teaser/gpt-image-teaser` | Lightweight GPT Image prompt and revision workflow for academic teaser figures |
-| `paperbanana-teaser` | `teaser/paperbanana-teaser` | Multi-stage planner/stylist/visualizer/critic workflow for academic teaser figures |
+### `skills/teaser-figures/`
 
-## Navigation
+This group is for academic figure prompting workflows.
 
-1. Pick the workflow family that matches the task: `paper/` or `teaser/`.
-2. Open the target skill's `SKILL.md` for the exact operating instructions.
-3. Reuse prompt text from that skill's `references/` directory when needed.
-4. Use scripts from that skill's `scripts/` directory when the workflow includes deterministic execution.
+- `gpt-image-teaser`: lightweight GPT Image prompt and revision workflow
+- `paperbanana-teaser`: multi-stage planner/stylist/visualizer/critic workflow
 
-## Suggested Usage
+## How To Navigate
 
-- Use `polish-paper` when the draft is already in English and mainly needs academic rewriting.
-- Use `polish-paper-bilingual` when the draft is Chinese, mixed-language, or needs aligned Chinese and English outputs.
-- Use `experiment-grounded-paper-review` when the goal is not just writing quality, but paper-code-experiment consistency and reproducible evidence.
-- Use `gpt-image-teaser` or `paperbanana-teaser` when the output is an academic figure prompt rather than final publication prose.
+1. Start in [skills/README.md](/Users/posit/workspace/paper/research-agent/skills/README.md).
+2. Pick the workflow family that matches the task.
+3. Open the group README for a quick comparison.
+4. Open the target skill's `SKILL.md` for the exact operating instructions.
+5. Reuse prompt text from that skill's `references/` directory when needed.
+
+## Design Principles
+
+- Keep the repository top level clean.
+- Group skills by workflow, not by file type.
+- Keep each skill self-contained so it can be copied or reused independently.
+- Use README files as navigation layers instead of forcing users to infer structure from directory names alone.

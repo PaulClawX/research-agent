@@ -1,4 +1,4 @@
 interface:
   display_name: "Polish Paper"
-  short_description: "Polish academic writing without changing the science"
-  default_prompt: "Use $polish-paper to revise my paper draft for clarity, concision, structure, and conference-style academic writing while preserving the original technical claims."
+  short_description: "Review and polish academic writing without changing the science"
+  default_prompt: "Use $polish-paper on my paper in review-and-polish mode: run the review gate first, then the SciWrite clarity pass, then return safe revised text and remaining author decisions."

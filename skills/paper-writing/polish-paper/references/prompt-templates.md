@@ -138,3 +138,55 @@ Do not substantially rewrite unless necessary for clarity.
 Source text:
 {text}
 ```
+
+## 7. Review-And-Polish
+
+Use this when the user wants a simple one-pass author-side review plus safe rewrite.
+
+```text
+Review and polish the following manuscript text using a two-stage workflow.
+
+Stage 1: Review gate
+- Flag correctness risks, unsupported claims, inconsistent terminology, mismatched numbers, reference issues, and reviewer-facing weaknesses.
+- Classify issues as blocking, major, minor, or copyedit.
+- Do not rewrite unsupported content into stronger language.
+
+Stage 2: SciWrite clarity pass
+- Remove clutter and filler.
+- Prefer active, precise verbs when appropriate.
+- Fix buried predicates, run-ons, and weak paragraph flow.
+- Keep technical terms consistent.
+- Check internal consistency of numbers, tables, figures, and citations when visible.
+
+Then provide:
+1. Review Gate: concise issue list.
+2. Revised Text: safe polished version.
+3. Residual Author Decisions: anything needing author judgment, evidence, or source verification.
+
+Target venue or style: {venue_or_style}
+Output language for notes: {language}
+Editing strength: {light_or_full}
+Additional constraints: {constraints}
+
+Source text:
+{text}
+```
+
+## 8. SciWrite Targeted Audit
+
+Use this when the user asks for a focused writing-quality pass rather than full review.
+
+```text
+Audit the following scientific writing using only the requested SciWrite pass.
+
+Requested pass: {clutter|voice_verbs|sentence_architecture|terminology|numbers_citations|all}
+
+Requirements:
+- Preserve scientific meaning and all factual claims.
+- Show the original issue, suggested revision, and a short rationale.
+- Use severity tags: critical, major, minor.
+- If the text is already clear, say so instead of forcing edits.
+
+Source text:
+{text}
+```
