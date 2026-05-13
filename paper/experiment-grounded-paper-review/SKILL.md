@@ -150,6 +150,7 @@ This skill ships helper scripts in [scripts](./scripts):
 - `auto_prepare_reproduction.py`
 - `run_reproduction.py`
 - `extract_numeric_evidence.py`
+- `extract_structured_tables.py`
 - `backfill_claim_evidence.py`
 - `compare_results.py`
 - `check_claim_result_alignment.py`
@@ -171,8 +172,8 @@ Read these as needed:
 Typical sequence:
 
 1. Run `discover_paper_files.py` on the paper directory to detect the main manuscript, bib files, tables, figures, and supplemental files.
-2. Run `run_paper_audit.py` on the paper directory to build a first-pass manifest, metadata file, claim ledger, GitHub repo candidates, cloned repos, an automatic reproduction config, an experiment ledger, extracted numeric evidence, and an enriched claim ledger.
-3. Review `AUTO_REPRO_CONFIG.json`, `EXPERIMENT_LEDGER.md`, and `NUMERIC_EVIDENCE.md` to see whether the automatic probe found runnable eval or test commands and reusable result numbers.
+2. Run `run_paper_audit.py` on the paper directory to build a first-pass manifest, metadata file, claim ledger, GitHub repo candidates, cloned repos, an automatic reproduction config, an experiment ledger, extracted numeric evidence, structured table evidence, and an enriched claim ledger.
+3. Review `AUTO_REPRO_CONFIG.json`, `EXPERIMENT_LEDGER.md`, `NUMERIC_EVIDENCE.md`, and `TABLE_EVIDENCE.md` to see whether the automatic probe found runnable eval or test commands and reusable result tables.
 4. If needed, tighten commands manually and rerun `run_reproduction.py` for deeper reproduction.
-5. Use `CLAIM_LEDGER_ENRICHED.md` and `INCONSISTENCY_REPORT.md` to see which claims now have partial numeric grounding and which still need new experiments.
+5. Use `CLAIM_LEDGER_ENRICHED.md` and `INCONSISTENCY_REPORT.md` to see which claims now have partial numeric or table grounding and which still need new experiments.
 6. If the user wants direct manuscript changes, prepare `latex_patch_plan.json` and apply it with `patch_latex_claims.py`.

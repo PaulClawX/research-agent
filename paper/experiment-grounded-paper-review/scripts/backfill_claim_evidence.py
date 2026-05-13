@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Backfill claim records with numeric evidence extracted from READMEs and logs."""
+"""Backfill claim records with numeric and structured-table evidence."""
 
 from __future__ import annotations
 
@@ -85,11 +85,57 @@ def score_evidence(claim: dict, evidence: dict) -> tuple[int, bool]:
     return score, exact_numeric_match
 
 
-def enrich_claim(claim: dict, evidence_items: list[dict], experiments_by_id: dict[str, dict]) -> dict:
+def score_table_evidence(claim: dict, evidence: dict) -> tuple[int, bool]:
+    score = 0
+    claim_text = claim["text"]
+    claim_keywords = extract_keywords(claim_text)
+    evidence_keywords = set(evidence.get("keywords", []))
+    overlap = claim_keywords & evidence_keywords
+    score += min(len(overlap), 8) * 3
+
+    claim_numbers = extract_numbers(claim_text)
+    exact_numeric_match = False
+    for claim_value in claim_numbers:
+        for cell in evidence.get("numeric_cells", []):
+            for value in cell.get("values", []):
+                if abs(claim_value - value) < 1e-6:
+                    exact_numeric_match = True
+                    score += 12
+                elif abs(claim_value - value) <= max(0.5, abs(claim_value) * 0.05):
+                    score += 4
+
+    row_label = evidence.get("row_label", "").lower()
+    if row_label and any(token in row_label for token in claim_keywords):
+        score += 4
+
+    caption = evidence.get("table_caption", "").lower()
+    section_lower = claim.get("section", "").lower()
+    for hint in SECTION_HINTS:
+        if hint in section_lower and (hint in caption or hint in row_label):
+            score += 5
+
+    if claim.get("claim_type") == "comparative":
+        if any("error" in cell.get("header", "").lower() or "acc" in cell.get("header", "").lower() for cell in evidence.get("numeric_cells", [])):
+            score += 3
+    if claim.get("claim_type") == "efficiency":
+        if any(token in caption for token in ["flops", "latency", "speed", "time", "cost"]):
+            score += 3
+
+    return score, exact_numeric_match
+
+
+def enrich_claim(claim: dict, evidence_items: list[dict], table_items: list[dict], experiments_by_id: dict[str, dict]) -> dict:
     scored = []
     any_exact_numeric_match = False
     for evidence in evidence_items:
         score, exact_numeric_match = score_evidence(claim, evidence)
+        if score <= 0:
+            continue
+        if exact_numeric_match:
+            any_exact_numeric_match = True
+        scored.append((score, evidence))
+    for evidence in table_items:
+        score, exact_numeric_match = score_table_evidence(claim, evidence)
         if score <= 0:
             continue
         if exact_numeric_match:
@@ -106,9 +152,18 @@ def enrich_claim(claim: dict, evidence_items: list[dict], experiments_by_id: dic
     evidence_strings = []
     support_ids = []
     for item in top_items:
-        evidence_strings.append(
-            f'{item["source_type"]}:{Path(item["source_file"]).name}: {item["snippet"]}'
-        )
+        if item["source_type"] in {"markdown_table_row", "latex_table_row"}:
+            numeric_summary = ", ".join(
+                f'{cell.get("header", "")}={",".join(str(value) for value in cell.get("values", []))}'
+                for cell in item.get("numeric_cells", [])
+            )
+            evidence_strings.append(
+                f'{item["source_type"]}:{Path(item["source_file"]).name}:{item.get("row_label", "")}: {numeric_summary}'
+            )
+        else:
+            evidence_strings.append(
+                f'{item["source_type"]}:{Path(item["source_file"]).name}: {item["snippet"]}'
+            )
         exp_id = item.get("experiment_id")
         if exp_id and exp_id not in support_ids:
             support_ids.append(exp_id)
@@ -168,6 +223,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("claims_json", help="Input claims JSON")
     parser.add_argument("evidence_json", help="Extracted evidence JSON")
+    parser.add_argument("table_evidence_json", help="Structured table evidence JSON")
     parser.add_argument("experiments_json", help="Experiment ledger JSON")
     parser.add_argument("--claims-json-out", default="CLAIMS_ENRICHED.json", help="Enriched claims JSON output")
     parser.add_argument("--claims-md-out", default="CLAIM_LEDGER_ENRICHED.md", help="Enriched claims Markdown output")
@@ -176,10 +232,11 @@ def main() -> None:
 
     claims = json.loads(Path(args.claims_json).read_text(encoding="utf-8"))
     evidence_items = json.loads(Path(args.evidence_json).read_text(encoding="utf-8"))
+    table_items = json.loads(Path(args.table_evidence_json).read_text(encoding="utf-8"))
     experiments = json.loads(Path(args.experiments_json).read_text(encoding="utf-8"))
     experiments_by_id = {experiment["experiment_id"]: experiment for experiment in experiments}
 
-    enriched_claims = [enrich_claim(claim, evidence_items, experiments_by_id) for claim in claims]
+    enriched_claims = [enrich_claim(claim, evidence_items, table_items, experiments_by_id) for claim in claims]
 
     Path(args.claims_json_out).write_text(json.dumps(enriched_claims, indent=2, ensure_ascii=False), encoding="utf-8")
     write_markdown(enriched_claims, Path(args.claims_md_out))

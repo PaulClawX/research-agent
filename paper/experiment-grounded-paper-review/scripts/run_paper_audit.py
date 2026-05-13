@@ -195,6 +195,20 @@ def main() -> None:
         [str(experiments_json), "--json-out", str(evidence_json), "--md-out", str(evidence_md)],
     )
 
+    table_evidence_json = out_dir / "TABLE_EVIDENCE.json"
+    table_evidence_md = out_dir / "TABLE_EVIDENCE.md"
+    run_python(
+        "extract_structured_tables.py",
+        [
+            str(paper_root),
+            str(experiments_json),
+            "--json-out",
+            str(table_evidence_json),
+            "--md-out",
+            str(table_evidence_md),
+        ],
+    )
+
     enriched_claims_json = out_dir / "CLAIMS_ENRICHED.json"
     enriched_claims_md = out_dir / "CLAIM_LEDGER_ENRICHED.md"
     enriched_experiments_json = out_dir / "EXPERIMENTS_ENRICHED.json"
@@ -203,6 +217,7 @@ def main() -> None:
         [
             str(claims_json),
             str(evidence_json),
+            str(table_evidence_json),
             str(experiments_json),
             "--claims-json-out",
             str(enriched_claims_json),
