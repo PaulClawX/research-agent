@@ -1,83 +1,66 @@
 # Research Agent
 
-This repository collects reusable research-assistant skills for two focused workflows:
+This repository is a curated library of reusable research-assistant skills.
 
-- `paper/`: academic writing and paper-polishing skills
-- `teaser/`: academic teaser figure and method-diagram prompting skills
+It is organized around two core workflows:
 
-Each skill package includes:
+- paper writing and academic rewriting
+- teaser figure and method-diagram prompting
 
-- `SKILL.md`: the skill definition and operating workflow
-- `agents/openai.yaml`: agent configuration
-- `references/`: reusable prompt templates or prompt references
+The goal is to keep the repository easy to scan at the top level while allowing each skill to remain self-contained.
 
-## Repository Layout
+## Repository Structure
 
 ```text
 .
 ├── README.md
-├── paper/
-│   ├── polish-paper/
-│   └── polish-paper-bilingual/
-└── teaser/
-    ├── gpt-image-teaser/
-    └── paperbanana-teaser/
+└── skills/
+    ├── README.md
+    ├── paper-writing/
+    │   ├── README.md
+    │   ├── polish-paper/
+    │   └── polish-paper-bilingual/
+    └── teaser-figures/
+        ├── README.md
+        ├── gpt-image-teaser/
+        └── paperbanana-teaser/
 ```
 
-## Paper Skills
+## What Lives In A Skill
 
-### `paper/polish-paper`
+Each skill package follows the same internal pattern:
 
-Use this skill for English academic writing improvement without changing the science.
+- `SKILL.md`: purpose, workflow, inputs, output modes, and usage rules
+- `agents/openai.yaml`: agent-facing metadata and starter prompt
+- `references/`: reusable prompt templates or prompt reference material
 
-Best for:
+## Skill Groups
 
-- polishing abstracts, introductions, methods, experiments, and conclusions
-- rewriting rebuttals in a clearer and more conference-ready style
-- tightening wording, structure, and logical flow while preserving technical claims
+### `skills/paper-writing/`
 
-### `paper/polish-paper-bilingual`
+This group is for improving academic text.
 
-Use this skill for Chinese-first academic writing and bilingual academic rewriting.
+- `polish-paper`: English academic editing and rebuttal polishing
+- `polish-paper-bilingual`: Chinese-first and bilingual academic rewriting
 
-Best for:
+### `skills/teaser-figures/`
 
-- polishing Chinese research drafts
-- translating Chinese drafts into natural paper-style English
-- translating English academic text into precise Chinese
-- preparing aligned bilingual revisions or rebuttals
+This group is for academic figure prompting workflows.
 
-## Teaser Skills
+- `gpt-image-teaser`: lightweight GPT Image prompt and revision workflow
+- `paperbanana-teaser`: multi-stage planner/stylist/visualizer/critic workflow
 
-### `teaser/gpt-image-teaser`
+## How To Navigate
 
-Use this skill when the goal is a concise GPT Image-oriented workflow for academic figures.
+1. Start in [skills/README.md](/Users/posit/workspace/paper/research-agent/skills/README.md).
+2. Pick the workflow family that matches the task.
+3. Open the group README for a quick comparison.
+4. Open the target skill's `SKILL.md` for the exact operating instructions.
+5. Reuse prompt text from that skill's `references/` directory when needed.
 
-Best for:
+## Design Principles
 
-- turning a paper summary into a GPT Image prompt
-- drafting method-overview or teaser prompts quickly
-- issuing targeted follow-up prompts to repair clutter, labels, or layout
-
-### `teaser/paperbanana-teaser`
-
-Use this skill when the user wants a more structured multi-stage academic figure prompting workflow.
-
-Best for:
-
-- planner-stylist-visualizer-critic pipelines
-- conference-style teaser figures and system diagrams
-- critique-and-revise loops for generated academic visuals
-
-## How To Use
-
-1. Pick the skill that matches the task.
-2. Read the corresponding `SKILL.md`.
-3. Reuse the prompts in `references/` when you need a paste-ready template.
-4. Use `agents/openai.yaml` when the skill is being wired into an agent workflow.
-
-## Notes
-
-- `paper/` focuses on writing quality, bilingual rewriting, and rebuttal polishing.
-- `teaser/` focuses on prompt workflows for academic figures rather than direct design-tool implementation.
-- The repository is organized as a skill library, not as an executable application.
+- Keep the repository top level clean.
+- Group skills by workflow, not by file type.
+- Keep each skill self-contained so it can be copied or reused independently.
+- Use README files as navigation layers instead of forcing users to infer structure from directory names alone.
