@@ -2,33 +2,11 @@
 
 这个仓库采用“推荐入口 -> 兼容镜像 -> 重型工具目录”的组合结构。
 
-## 目录图
+## 功能地图
 
-```text
-research-agent/
-├── README.md
-├── docs/
-├── examples/
-└── skills/
-    ├── paper-writing/
-    │   └── polish-paper/
-    └── teaser-figures/
-        ├── gpt-image-teaser/
-        └── paperbanana-teaser/
-```
+![Research Agent 功能地图](assets/research-agent-functions.svg)
 
-同时仓库还保留了兼容镜像和高级工具目录：
-
-```text
-research-agent/
-├── paper/
-│   ├── experiment-grounded-paper-review/
-│   ├── polish-paper/
-│   └── polish-paper-bilingual/
-└── teaser/
-    ├── gpt-image-teaser/
-    └── paperbanana-teaser/
-```
+这张图强调“这个项目能帮你做什么”，而不是让用户先记目录层级。目录结构只作为导航细节存在：`skills/` 是推荐入口，`paper/` 和 `teaser/` 是兼容路径，`docs/` 和 `examples/` 负责快速上手。
 
 ## 设计思路
 

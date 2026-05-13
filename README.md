@@ -19,28 +19,16 @@
 | 做更完整的 teaser prompt chain | `skills/teaser-figures/` | `paperbanana-teaser` |
 | 审计论文 claim、实验与数值证据 | `paper/experiment-grounded-paper-review/` | `SKILL.md` + `scripts/` |
 
-## 一分钟理解结构
+## 一分钟理解这个项目
 
-```mermaid
-flowchart TD
-    A[Research Agent] --> B[skills]
-    A --> C[paper]
-    A --> D[teaser]
-    B --> E[paper-writing]
-    B --> F[teaser-figures]
-    E --> G[polish-paper]
-    F --> H[gpt-image-teaser]
-    F --> I[paperbanana-teaser]
-    C --> J[experiment-grounded-paper-review]
-    J --> K[scripts]
-    J --> L[references]
-```
+![Research Agent 功能地图](docs/assets/research-agent-functions.svg)
 
-你可以把它理解成三层：
+你可以把它理解成一个研究工作台，而不是一个普通目录集合：
 
-1. `skills/` 是推荐入口，面向日常使用
-2. `paper/` 和 `teaser/` 保留兼容目录，供旧路径或脚本继续引用
-3. `paper/experiment-grounded-paper-review/` 提供更重型的论文审计能力
+1. 论文文字要更像论文，走 `polish-paper`
+2. 论文方法要变成 teaser 图 prompt，走 `gpt-image-teaser` 或 `paperbanana-teaser`
+3. 论文 claim、表格、实验日志要互相对上，走 `experiment-grounded-paper-review`
+4. 想迁移或复用某个能力，直接复制对应 skill 目录
 
 ## 快速安装
 
