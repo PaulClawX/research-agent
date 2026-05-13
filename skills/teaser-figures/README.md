@@ -1,14 +1,21 @@
 # Teaser Figure Skills
 
-This group contains skills for converting paper content into academic figure prompting workflows.
+这个分组专门解决“怎样把论文方法更清楚地变成图像模型可理解的 prompt”。
 
-## Available Skills
+## 适用任务
+
+- teaser figures
+- method overviews
+- academic diagrams
+- image-model revision workflows
+
+## 可用 Skill
 
 ### `gpt-image-teaser`
 
-Use this when the user wants a compact GPT Image-facing workflow.
+适合想快速起稿、快速试图的场景。
 
-Best for:
+特别适合：
 
 - quick prompt drafting
 - figure briefs
@@ -16,15 +23,20 @@ Best for:
 
 ### `paperbanana-teaser`
 
-Use this when the user wants a more structured prompt chain and critique loop.
+适合想要更强结构控制、更完整工作流的场景。
 
-Best for:
+特别适合：
 
 - planner/stylist/visualizer/critic workflows
 - more controlled diagram generation
 - critique and revision after a first render
 
-## Directory Map
+## 怎么选
+
+- 想快速开始：选 `gpt-image-teaser`
+- 想一步步细化：选 `paperbanana-teaser`
+
+## 目录图
 
 ```text
 teaser-figures/

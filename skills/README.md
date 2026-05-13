@@ -1,15 +1,22 @@
 # Skills Index
 
-All reusable assets in this repository live under `skills/`.
+`skills/` 是这个仓库的核心区域。
 
-Choose a group based on the kind of task you want to solve:
+如果你已经知道自己要解决什么问题，这一页就是最快的入口。
 
-- [paper-writing](./paper-writing/README.md): revise, polish, or translate academic text
-- [teaser-figures](./teaser-figures/README.md): turn paper content into academic teaser-figure prompts
+## 快速选择
 
-## Selection Guide
+| 你的任务 | 去哪里 | 推荐 skill |
+| --- | --- | --- |
+| 改 abstract / intro / method / rebuttal | [paper-writing](./paper-writing/README.md) | `polish-paper` |
+| 快速写 GPT Image teaser prompt | [teaser-figures](./teaser-figures/README.md) | `gpt-image-teaser` |
+| 做完整 teaser prompt chain | [teaser-figures](./teaser-figures/README.md) | `paperbanana-teaser` |
 
-Use `paper-writing` when the main artifact is text:
+## 分组说明
+
+### `paper-writing`
+
+适合文字类产出：
 
 - abstracts
 - introductions
@@ -18,19 +25,21 @@ Use `paper-writing` when the main artifact is text:
 - conclusions
 - rebuttals
 
-Use `teaser-figures` when the main artifact is a figure prompt or revision workflow:
+### `teaser-figures`
+
+适合图像 prompt 类产出：
 
 - teaser figures
 - method overviews
 - academic diagrams
 - iterative image-model prompt chains
 
-## Shared Package Pattern
+## 每个 Skill 里有什么
 
-Every skill directory is expected to contain:
+每个 skill 目录都遵循同一套结构：
 
 - `SKILL.md`
 - `agents/openai.yaml`
 - `references/`
 
-That convention makes it easier to add more skill families later without changing the repository design.
+这能保证不同 skill 的阅读和迁移成本都比较低。
