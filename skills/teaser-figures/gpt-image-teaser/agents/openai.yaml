@@ -1,4 +1,0 @@
-interface:
-  display_name: "GPT Image Teaser"
-  short_description: "Academic teaser prompts for GPT Image"
-  default_prompt: "Use $gpt-image-teaser to turn my paper summary into a GPT Image prompt and revision workflow for an academic teaser figure."
