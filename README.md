@@ -8,7 +8,7 @@
 | --- | --- |
 | 论文润色 | `paper/polish-paper/` |
 | 中英改写 | `paper/polish-paper-bilingual/` |
-| 论文审计 | `paper/experiment-grounded-paper-review/` |
+| 论文审稿 | `paper/experiment-grounded-paper-review/` |
 | teaser prompt | `teaser/gpt-image-teaser/` |
 | teaser chain | `teaser/paperbanana-teaser/` |
 
