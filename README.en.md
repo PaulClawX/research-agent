@@ -2,25 +2,17 @@
 
 # Research Agent
 
-A compact repository of research skills.
-
-It keeps only three core areas:
-
-- `paper/`: paper polishing and evidence-grounded paper auditing
-- `teaser/`: academic teaser-figure prompts
-- `README.md` / `README.en.md`: bilingual entry points
-
-## Fast Entry
+Minimal entry points:
 
 | Task | Entry |
 | --- | --- |
-| Polish a paper draft | `paper/polish-paper/` |
-| Rewrite in Chinese or bilingual form | `paper/polish-paper-bilingual/` |
-| Audit paper evidence | `paper/experiment-grounded-paper-review/` |
-| Generate teaser prompts | `teaser/gpt-image-teaser/` |
-| Build a full teaser chain | `teaser/paperbanana-teaser/` |
+| Paper polishing | `paper/polish-paper/` |
+| Chinese or bilingual rewrite | `paper/polish-paper-bilingual/` |
+| Paper audit | `paper/experiment-grounded-paper-review/` |
+| Teaser prompts | `teaser/gpt-image-teaser/` |
+| Teaser chains | `teaser/paperbanana-teaser/` |
 
-## Layout
+Only two top-level content dirs remain:
 
 ```text
 .
@@ -30,7 +22,4 @@ It keeps only three core areas:
 └── teaser/
 ```
 
-## How to Use
-
-Open the target `SKILL.md` first, then its `references/`.  
-For automated paper auditing, use the scripts under `paper/experiment-grounded-paper-review/scripts/`.
+Open the target `SKILL.md` first, then `references/`. For automated paper auditing, use `paper/experiment-grounded-paper-review/scripts/`.
